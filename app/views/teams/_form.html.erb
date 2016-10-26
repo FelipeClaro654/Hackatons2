@@ -1,38 +1,20 @@
-<%= form_for(@team) do |f| %>
-  <% if @team.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
-
-      <ul>
-      <% @team.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="jumbotron">
-    <div class="field">
-      <%= f.label :name %><br>
-      <%= f.text_field :name %>
-    </div>
-    <div class="field">
-      <%= f.label :description %><br>
-      <%= f.text_area :description %>
-    </div>
-    <div class="field">
-      <%= f.label :tipo %><br>
-      <%= f.collection_select :tipo_id, Tipo.all, :id, :nome %>
-    </div>
-
-    <% @new_forms = @team.integrantes.count %>
-    <h3 class="text-primary">Integrantes:</h3>
-
-    <%= render "lista_integrantes" %>
-
-
-<div id="include_form"></div>
-  <div class="actions">
-    <%= f.submit 'Atualizar Equipe', :class=> "btn btn-success"%>
+<%= form_for @team do |f| %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
   </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :tipo %><br>
+    <%= f.collection_select :tipo_id, Tipo.all, :id, :nome, include_blank: false %>
+  </div>
+
+  <%= f.fields_for :integrantes do |i| %>
+    <%= render 'integrante_fields', f: i %>
+    <%= link_to_add_association "add integrante", f, :integrantes %>
+  <% end %>
+  <%= f.submit 'Atualizar Equipe', :class=> "btn btn-success"%>
 <% end %>

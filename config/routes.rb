@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :teams
+  resources :teams do
+    collection do
+      get 'novo_integrante'
+    end
+  end
   root 'teams#index'
-  
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

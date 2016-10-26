@@ -15,7 +15,7 @@ class TeamsController < ApplicationController
   # GET /teams/new
   def new
     @team = Team.new
-    @team.integrantes.new
+    @integrantes = @team.integrantes.new
   end
 
   # GET /teams/1/edit
@@ -26,9 +26,9 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
-
     respond_to do |format|
       if @team.save
+        @team.update_attribute(:tipo_id, params[:team][:tipo_id])
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else
@@ -43,6 +43,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
+        @team.update_attribute(:tipo_id, params[:team][:tipo_id])
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
@@ -60,6 +61,11 @@ class TeamsController < ApplicationController
       format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def novo_integrante
+    byebug
+    render partial: "novo_integrante", locals:{i: params[:id]}
   end
 
   private

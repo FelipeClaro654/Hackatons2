@@ -1,0 +1,28 @@
+<div class="nested-fields">
+  <div class="field">
+    <%= f.label :nome %><br>
+    <%= f.text_field :nome %>
+  </div>
+  <div class="field">
+    <%= f.label :cpf %><br>
+    <%= f.text_field :cpf %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :obs %><br>
+    <%= f.text_area :obs %>
+  </div>
+  <div class="sub_integrantes">
+    <%= f.fields_for :sub_integrantes, :wrapper => 'inline' do |sub_integrante| %>
+      <%= render 'sub_integrante_fields', :f => sub_integrante %>
+      <div class="links">
+        <%= link_to_add_association 'add sub-integrante', f, :sub_integrantes, :render_options => { :wrapper => 'inline' } %>
+      </div>
+    <% end %>
+  </div>
+  <%= link_to_remove_association "remove integrante", f %>
+
+</div>
