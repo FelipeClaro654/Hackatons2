@@ -1,19 +1,20 @@
-<div class="nested-fields">
-  <div class="field">
-    <%= f.label :nome %><br>
-    <%= f.text_field :nome %>
-  </div>
-  <div class="field">
-    <%= f.label :cpf %><br>
-    <%= f.text_field :cpf %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :obs %><br>
-    <%= f.text_area :obs %>
-  </div>
-  <%= f.hidden_field :team_id, input_html: {value: @team.id}%>
-</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>CPF</th>
+      <th>E-mail</th>
+      <th>Observações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @team.integrantes.each do |p| %>
+      <tr>
+        <td><%= p.nome %></td>
+        <td><%= p.cpf %></td>
+        <td><%= p.email %></td>
+        <td><%= p.obs %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

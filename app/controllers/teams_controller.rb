@@ -14,8 +14,6 @@ class TeamsController < ApplicationController
 
   # GET /teams/new
   def new
-    byebug
-
     @team = Team.new
     @team.integrantes.new
   end

@@ -1,6 +1,6 @@
 class Team < ActiveRecord::Base
   has_many :integrantes
-  has_one :tipo
+  belongs_to :tipo
   accepts_nested_attributes_for :integrantes
 
   def integrantes_for_team

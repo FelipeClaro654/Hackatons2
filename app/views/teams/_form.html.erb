@@ -11,25 +11,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
+  <div class="jumbotron">
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <%= f.label :tipo %><br>
+      <%= f.collection_select :tipo_id, Tipo.all, :id, :nome %>
+    </div>
 
-  <% @new_forms = 0 %>
-
-  <%= f.fields_for :integrantes, @team.integrantes_for_team do |p| %>
-    <%= render "lista_integrantes", :f => p %>
     <% @new_forms = @team.integrantes.count %>
-  <% end %>
+    <h3 class="text-primary">Integrantes:</h3>
+
+    <%= render "lista_integrantes" %>
 
 
-
+<div id="include_form"></div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Atualizar Equipe', :class=> "btn btn-success"%>
   </div>
 <% end %>
