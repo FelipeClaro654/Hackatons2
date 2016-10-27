@@ -5,9 +5,15 @@ $(function () {
     setTimeout(function () {
       if($(".sub_integrantes:visible").length > 4){
           $(".add_fields").addClass('disabled');
-          return false;
+      }else{
+        $(".add_fields.disabled").removeClass('disabled');
       }
-        $(".add_fields").removeClass('disabled');
+
+      if($(".remove_fields:visible").length === 1){
+        $(".remove_fields:visible").addClass('disabled');
+      }else{
+        $(".remove_fields.disabled:visible").removeClass('disabled');
+      }
     }, 100);
   }
 
