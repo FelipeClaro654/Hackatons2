@@ -1,6 +1,9 @@
 Hackaton S2 IT
 
-
+- Sistema para cadastro de equipes
+- Formulário permite criar/editar a equipe e todos os integrantes de uma vez. Para facilitar o desenvolvimento desse formulário, foi inserida a gem Coccon que simplifica a criação de formulários compostos.
+- Layout estilizado com os padrões do Bootstrap
+- Foi utilizado Jquery para habilitar/desabilitar botões para adicionar ou remover integrantes
 
 Gems utilizadas:
 
@@ -24,3 +27,7 @@ Realiza testes de aceitação
 
 gem "guard-rspec"
 Roda automaticamente os testes do rspec quando salvos.
+
+TODO:
+Finalizar o desenvolvimento dos testes unitários e de aceitação.
+Realizar um teste de carga. Sugestão: Jmeter
