@@ -28,10 +28,10 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     respond_to do |format|
       if @team.save
-        format.html { render :show, notice: 'Team was successfully created.' }
+        format.html { render :show, notice: 'Time cadastrado com sucesso.' }
         format.json { render :show, status: :created, location: @team }
       else
-        format.html { render :new }
+        format.html { render :new, notice: 'Erro ao cadastrar novo time.' }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
@@ -42,10 +42,11 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { render :show, notice: 'Team was successfully updated.' }
+        @team.update_attribute(:tipo_id, params[:team][:tipo_id])
+        format.html { render :show, notice: 'Time cadastrado com sucesso.' }
         format.json { render :show, status: :ok, location: @team }
       else
-        format.html { render :edit }
+        format.html { render :edit, notice: 'Erro ao cadastrar novo time.' }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
@@ -61,11 +62,6 @@ class TeamsController < ApplicationController
     end
   end
 
-  def novo_integrante
-    byebug
-    render partial: "novo_integrante", locals:{i: params[:id]}
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_team
@@ -74,7 +70,7 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :description, :tipo_id, integrantes_attributes:[:nome, :cpf, :email, :obs, :_destroy])
+      params.require(:team).permit(:name, :description, :tipo_id, integrantes_attributes:[:id, :nome, :cpf, :email, :obs, :_destroy])
     end
 
 end
