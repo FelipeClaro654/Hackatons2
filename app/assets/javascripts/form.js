@@ -1,8 +1,9 @@
 $(function () {
 
   function integ_limit() {
+
     setTimeout(function () {
-      if($(".sub_integrantes").length > 4){
+      if($(".sub_integrantes:visible").length > 4){
           $(".add_fields").addClass('disabled');
           return false;
       }
@@ -13,6 +14,8 @@ $(function () {
   $(".new_team, .edit_team").on("click",".remove_fields,.add_fields", function () {
     integ_limit();
   })
+
+  $(".cpf-mask").mask("999.999.999-99");
 
   integ_limit();
 });

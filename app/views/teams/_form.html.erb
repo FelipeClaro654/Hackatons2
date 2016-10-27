@@ -4,33 +4,49 @@
 
     <ul>
       <% @team.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+      <li><%= msg %></li>
       <% end %>
     </ul>
   </div>
 <% end %>
 
 <%= form_for @team do |f| %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name, :required => true%>
+<div class="row">
+  <div class="col-md-7">
+    <div class="jumbotron">
+      <div class="row">
+          <div class="field form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, :required => true,
+            :class=>"form-control", :placeholder=>"Nome"%>
+          </div>
+      </div>
+      <div class="row">
+          <div class="field form-group">
+            <%= f.label :description %><br>
+            <%= f.text_area :description,
+            :class=>"form-control", :placeholder=>"Descrição" %>
+          </div>
+      </div>
+      <div class="row">
+          <div class="field form-group">
+            <%= f.label :tipo %><br>
+            <%= f.collection_select :tipo_id, Tipo.all, :id, :nome, include_blank: false %>
+          </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :tipo %><br>
-    <%= f.collection_select :tipo_id, Tipo.all, :id, :nome, include_blank: false %>
-  </div>
-
-<div id="integrantes">
-  <%= f.fields_for :integrantes do |i| %>
-    <%= render 'integrante_fields', :f => i %>
-    <%= link_to_add_association "add integrante", f, :integrantes %>
-  <% end %>
 </div>
-<%= show_simple_captcha %>
+
+<h3 class="text-primary">Integrantes:</h3>
+  <div id="integrantes">
+    <%= f.fields_for :integrantes do |i| %>
+    <%= render 'integrante_fields', :f => i %>
+    <%= link_to_add_association "add integrante",
+      f, :integrantes,
+      :class => "btn btn-primary pull-left btn-add-integrantes" %>
+    <% end %>
+  </div>
+  <%= show_simple_captcha %>
   <%= f.submit 'Atualizar Equipe', :class=> "btn btn-success"%>
 <% end %>

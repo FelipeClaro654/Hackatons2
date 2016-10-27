@@ -29,6 +29,9 @@ class TeamsController < ApplicationController
     if simple_captcha_valid?
       respond_to do |format|
         if @team.save
+          @team.integrantes.each do |integrante|
+            TeamMailer.confirm(integrante).deliver
+          end
           format.html { render :show, notice: 'Time cadastrado com sucesso.' }
           format.json { render :show, status: :created, location: @team }
         else

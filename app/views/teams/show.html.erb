@@ -1,5 +1,7 @@
-<p id="notice"><%= notice %></p>
 <div class="jumbotron">
+
+  <p id="notice"><%= notice %></p>
+
   <p>
     <strong>Nome:</strong>
     <%= @team.name %>
@@ -14,10 +16,10 @@
     <strong>Valor:</strong>
     <%= @team.tipo.nome %>
   </p>
-</div>
 
 <h3 class="text-primary">Integrantes:</h3>
 <%= render "lista_integrantes" %>
 
   <%= link_to 'Editar', edit_team_path(@team), :class => "btn btn-primary" %>
   <%= link_to 'Voltar', teams_path, :class => "btn btn-primary" %>
+</div>

@@ -16,4 +16,5 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require cocoon
+//= require maskedinput
 //= require_tree .
