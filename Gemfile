@@ -36,7 +36,12 @@ gem 'maskedinput-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-
+gem 'rspec-rails', '~> 3.5', :group => [:test, :development]
+group :test do
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

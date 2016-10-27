@@ -32,7 +32,7 @@ class TeamsController < ApplicationController
           @team.integrantes.each do |integrante|
             TeamMailer.confirm(integrante).deliver
           end
-          format.html { render :show, notice: 'Time cadastrado com sucesso.' }
+          format.html { redirect_to @team, notice: 'Time cadastrado com sucesso.' }
           format.json { render :show, status: :created, location: @team }
         else
           format.html { render :new, notice: 'Erro ao cadastrar novo time.' }
@@ -43,7 +43,7 @@ class TeamsController < ApplicationController
       @team.errors.add(:captcha, 'Captcha incorreto')
       respond_to do |format|
         format.html { render :new, notice: 'Erro ao cadastrar novo time.' }
-        format.json { render json: @team, status: :unprocessable_entity }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
   end

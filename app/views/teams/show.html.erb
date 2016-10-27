@@ -1,5 +1,4 @@
 <div class="jumbotron">
-
   <% if notice %>
     <div class="alert alert-success alert-dismissible pull-right" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -21,10 +20,9 @@
     <strong>Valor:</strong>
     <%= @team.tipo.nome %>
   </p>
+</div>
 
 <h3 class="text-primary">Integrantes:</h3>
 <%= render "lista_integrantes" %>
-
-  <%= link_to 'Editar', edit_team_path(@team), :class => "btn btn-primary" %>
-  <%= link_to 'Voltar', teams_path, :class => "btn btn-primary" %>
-</div>
+<%= link_to 'Editar', edit_team_path(@team), :class => "btn btn-warning" %>
+<%= link_to 'Voltar', teams_path, :class => "btn btn-primary" %>

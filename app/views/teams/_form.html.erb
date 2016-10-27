@@ -6,7 +6,7 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <h2>
-        <%= pluralize(@team.errors.count, "erro(s)") %>  proibem o envio:
+        <%= pluralize(@team.errors.count, "erro(s)") %> encontrado(s):
       </h2>
       <ul>
         <% @team.errors.full_messages.each do |msg| %>
