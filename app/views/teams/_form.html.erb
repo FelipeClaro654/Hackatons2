@@ -1,8 +1,7 @@
-<p id="notice"><%= notice %></p>
 <%= form_for @team do |f| %>
   <div class="field">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :required => true%>
   </div>
   <div class="field">
     <%= f.label :description %><br>
