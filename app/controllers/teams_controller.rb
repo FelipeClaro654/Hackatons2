@@ -28,8 +28,7 @@ class TeamsController < ApplicationController
     @team = Team.new(team_params)
     respond_to do |format|
       if @team.save
-        @team.update_attribute(:tipo_id, params[:team][:tipo_id])
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+        format.html { render :show, notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
@@ -43,8 +42,7 @@ class TeamsController < ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        @team.update_attribute(:tipo_id, params[:team][:tipo_id])
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
+        format.html { render :show, notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }
@@ -76,7 +74,7 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :description, integrantes_attributes:[:nome, :cpf, :email, :obs])
+      params.require(:team).permit(:name, :description, :tipo_id, integrantes_attributes:[:nome, :cpf, :email, :obs, :_destroy])
     end
 
 end

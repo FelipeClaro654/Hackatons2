@@ -12,9 +12,12 @@
     <%= f.collection_select :tipo_id, Tipo.all, :id, :nome, include_blank: false %>
   </div>
 
+<div id="integrantes">
   <%= f.fields_for :integrantes do |i| %>
-    <%= render 'integrante_fields', f: i %>
+    <%= render 'integrante_fields', :f => i %>
     <%= link_to_add_association "add integrante", f, :integrantes %>
   <% end %>
+</div>
+
   <%= f.submit 'Atualizar Equipe', :class=> "btn btn-success"%>
 <% end %>

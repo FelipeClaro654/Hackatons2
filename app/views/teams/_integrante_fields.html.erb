@@ -1,4 +1,4 @@
-<div class="nested-fields">
+<div class="sub_integrantes nested-fields">
   <div class="field">
     <%= f.label :nome %><br>
     <%= f.text_field :nome %>
@@ -15,14 +15,8 @@
     <%= f.label :obs %><br>
     <%= f.text_area :obs %>
   </div>
-  <div class="sub_integrantes">
-    <%= f.fields_for :sub_integrantes, :wrapper => 'inline' do |sub_integrante| %>
-      <%= render 'sub_integrante_fields', :f => sub_integrante %>
-      <div class="links">
-        <%= link_to_add_association 'add sub-integrante', f, :sub_integrantes, :render_options => { :wrapper => 'inline' } %>
-      </div>
-    <% end %>
-  </div>
-  <%= link_to_remove_association "remove integrante", f %>
+
+  <%= link_to_remove_association "remove integrante",
+    f, {wrapper_class: "sub_integrantes"}%>
 
 </div>
