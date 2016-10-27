@@ -26,13 +26,21 @@ class TeamsController < ApplicationController
   # POST /teams.json
   def create
     @team = Team.new(team_params)
-    respond_to do |format|
-      if @team.save
-        format.html { render :show, notice: 'Time cadastrado com sucesso.' }
-        format.json { render :show, status: :created, location: @team }
-      else
+    if simple_captcha_valid?
+      respond_to do |format|
+        if @team.save
+          format.html { render :show, notice: 'Time cadastrado com sucesso.' }
+          format.json { render :show, status: :created, location: @team }
+        else
+          format.html { render :new, notice: 'Erro ao cadastrar novo time.' }
+          format.json { render json: @team.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @team.errors.add(:captcha, 'Captcha incorreto')
+      respond_to do |format|
         format.html { render :new, notice: 'Erro ao cadastrar novo time.' }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+        format.json { render json: @team, status: :unprocessable_entity }
       end
     end
   end
@@ -40,16 +48,25 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
-    respond_to do |format|
-      if @team.update(team_params)
-        @team.update_attribute(:tipo_id, params[:team][:tipo_id])
-        format.html { render :show, notice: 'Time cadastrado com sucesso.' }
-        format.json { render :show, status: :ok, location: @team }
-      else
-        format.html { render :edit, notice: 'Erro ao cadastrar novo time.' }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
+    if simple_captcha_valid?
+      respond_to do |format|
+        if @team.update(team_params)
+          @team.update_attribute(:tipo_id, params[:team][:tipo_id])
+          format.html { render :show, notice: 'Time cadastrado com sucesso.' }
+          format.json { render :show, status: :ok, location: @team }
+        else
+          format.html { render :edit, notice: 'Erro ao cadastrar novo time.' }
+          format.json { render json: @team.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @team.errors.add(:captcha, 'Captcha incorreto')
+      respond_to do |format|
+        format.html { render :edit, notice: 'Captcha incorreto.' }
+        format.json { render json: @team, status: :unprocessable_entity }
       end
     end
+
   end
 
   # DELETE /teams/1
@@ -70,7 +87,7 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :description, :tipo_id, integrantes_attributes:[:id, :nome, :cpf, :email, :obs, :_destroy])
+      params.require(:team).permit(:name, :description, :tipo_id, :captcha, :captcha_key, integrantes_attributes:[:id, :nome, :cpf, :email, :obs, :_destroy])
     end
 
 end

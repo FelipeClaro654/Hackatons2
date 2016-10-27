@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025105554) do
+ActiveRecord::Schema.define(version: 20161027090859) do
 
   create_table "integrantes", force: :cascade do |t|
     t.string   "nome"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20161025105554) do
     t.datetime "updated_at", null: false
     t.integer  "team_id"
   end
+
+  create_table "simple_captcha_data", force: :cascade do |t|
+    t.string   "key",        limit: 40
+    t.string   "value",      limit: 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "simple_captcha_data", ["key"], name: "idx_key"
 
   create_table "teams", force: :cascade do |t|
     t.string   "name"

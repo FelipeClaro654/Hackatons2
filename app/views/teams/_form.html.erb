@@ -1,4 +1,17 @@
+<% if @team.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@team.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+    <ul>
+      <% @team.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for @team do |f| %>
+
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name, :required => true%>
@@ -18,6 +31,6 @@
     <%= link_to_add_association "add integrante", f, :integrantes %>
   <% end %>
 </div>
-
+<%= show_simple_captcha %>
   <%= f.submit 'Atualizar Equipe', :class=> "btn btn-success"%>
 <% end %>
