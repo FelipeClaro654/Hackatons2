@@ -4,6 +4,9 @@ Hackaton S2 IT
 - Formulário permite criar/editar a equipe e todos os integrantes de uma vez. Para facilitar o desenvolvimento desse formulário, foi inserida a gem Coccon que simplifica a criação de formulários compostos.
 - Layout estilizado com os padrões do Bootstrap
 - Foi utilizado Jquery para habilitar/desabilitar botões para adicionar ou remover integrantes
+- Utilização do Sqlite nativo do Rails
+
+OBS: rodar as migrations antes de rodar a aplicação. 
 
 Gems utilizadas:
 
