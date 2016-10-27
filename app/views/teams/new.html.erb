@@ -1,3 +1,10 @@
 <h1>Cadastrar Equipe</h1>
 <%= render 'form' %>
-<%= link_to 'Voltar', teams_path, :class=> "btn btn-primary" %>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="field form-group">
+      <%= link_to 'Voltar', teams_path, :class=> "btn btn-primary pull-right btn-return-new" %>
+    </div>
+  </div>
+</div>

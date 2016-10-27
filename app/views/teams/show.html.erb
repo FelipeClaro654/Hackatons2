@@ -1,6 +1,11 @@
 <div class="jumbotron">
 
-  <p id="notice"><%= notice %></p>
+  <% if notice %>
+    <div class="alert alert-success alert-dismissible pull-right" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <%= notice %>
+    </div>
+  <% end %>
 
   <p>
     <strong>Nome:</strong>

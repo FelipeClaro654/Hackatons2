@@ -1,13 +1,21 @@
 <% if @team.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@team.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-    <ul>
-      <% @team.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-      <% end %>
-    </ul>
+    <div class="alert alert-danger alert-dismissible pull-right" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <h2>
+        <%= pluralize(@team.errors.count, "erro(s)") %>  proibem o envio:
+      </h2>
+      <ul>
+        <% @team.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
   </div>
+
 <% end %>
 
 <%= form_for @team do |f| %>
@@ -42,11 +50,15 @@
   <div id="integrantes">
     <%= f.fields_for :integrantes do |i| %>
     <%= render 'integrante_fields', :f => i %>
-    <%= link_to_add_association "add integrante",
+    <%= link_to_add_association "Adicionar Integrante",
       f, :integrantes,
       :class => "btn btn-primary pull-left btn-add-integrantes" %>
     <% end %>
   </div>
   <%= show_simple_captcha %>
-  <%= f.submit 'Atualizar Equipe', :class=> "btn btn-success"%>
+  <div class="row">
+    <div class="col-md-8">
+      <%= f.submit 'Enviar Formulário', :class=> "btn btn-success pull-right"%>
+    </div>
+  </div>
 <% end %>
