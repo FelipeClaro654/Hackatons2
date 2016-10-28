@@ -17,7 +17,7 @@ gem "cocoon"
 Facilita a criação dos nested forms (formulários envolvendo classes pai e filho).
 
 gem 'simple_captcha2', require: 'simple_captcha'
-Facilita a criação de captchas.
+Permite a criação de captchas.
 
 gem 'maskedinput-rails'
 Cria máscaras, utilizadas nos campos de CPF
